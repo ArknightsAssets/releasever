@@ -3,7 +3,7 @@ import urllib.request
 import json
 
 def fetch_current_version() -> str:
-    with urllib.request.urlopen(f"https://ak-conf.hypergryph.com/config/prod/official/Android/version") as response:
+    with urllib.request.urlopen("https://ak-conf.hypergryph.com/config/prod/official/Android/version") as response:
         return json.loads(response.read())["resVersion"]
 
 
@@ -19,7 +19,7 @@ def get_characters_in_version(version: str) -> list[str]:
             return []
         raise
 
-    characters = []
+    characters: list[str] = []
     for info in hol["abInfos"]:
         if info["name"].startswith("charpack/char_"):
             characters.append(info["name"].split("/", 1)[1].split(".", 1)[0])
